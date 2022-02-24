@@ -23,10 +23,9 @@ def main():
             element = str(element)
             value = element[element.index("<td>") + 4: element.index("</td>")]
             if value == "Domain Name":
-                with open (filename,"a") as f:
-
+                with open (filename, "a") as f: 
                     print("The results can foud in results.txt")
-                    print("[+] Domain names owned by " + key + " are: ", file=f)
+                    print(key, file=f)
                     print()
 
             else:
@@ -39,14 +38,15 @@ def main():
         print("[-] " + key + " doesn't have any registered domain names")
 
 
-    dict1 = {}
-    with open( filename ) as fh : 
-        for line in fh : 
-            command, description = line.strip().split(None,1)
-            dict1[command] = description.strip() 
-    out_file = open("test1.json", "w")
-    json.dump(dict1, out_file, indent= 4, sort_keys=False)
-    out_file.close()
+   # dict1 = {}
+    #dictionary that holds the key-value pair
+    #with open( filename ) as fh : 
+    #    for line in fh : 
+    #        command, description = line.strip().split(None,1)
+    #        dict1[command] = description.strip() 
+    #out_file = open("test1.json", "w")
+    #json.dump(dict1, out_file, indent= 4, sort_keys=False)
+    #out_file.close()
 
 
 
