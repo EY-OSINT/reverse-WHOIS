@@ -1,7 +1,9 @@
 import requests
+import json 
 from bs4 import BeautifulSoup as bs4
 
 def main():
+    filename= 'results.txt'
     key = input("Enter an indivisual's name or e-mail address : ")
 
     link = "https://viewdns.info/reversewhois/?q=" + key
@@ -21,16 +23,32 @@ def main():
             element = str(element)
             value = element[element.index("<td>") + 4: element.index("</td>")]
             if value == "Domain Name":
-                print()
-                print("[+] Domain names owned by " + key + " are: ")
-                print()
+                with open (filename,"a") as f:
+
+                    print("The results can foud in results.txt")
+                    print("[+] Domain names owned by " + key + " are: ", file=f)
+                    print()
 
             else:
-                print(value)
+                with open (filename,"a") as f:
+                    print(value,file=f)
+
 
     except:
         print()
         print("[-] " + key + " doesn't have any registered domain names")
+
+
+    dict1 = {}
+    with open( filename ) as fh : 
+        for line in fh : 
+            command, description = line.strip().split(None,1)
+            dict1[command] = description.strip() 
+    out_file = open("test1.json", "w")
+    json.dump(dict1, out_file, indent= 4, sort_keys=False)
+    out_file.close()
+
+
 
 
 while True:
